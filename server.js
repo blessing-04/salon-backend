@@ -8,8 +8,8 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors());
-app.use(express.json()); // Make sure you have this to parse JSON bodies
-// Supabase client with service role key (never expose this to frontend)
+app.use(express.json()); // parse JSON bodies
+// Supabase client with service role key
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
 
 // Route: Get all appointments
@@ -55,7 +55,6 @@ app.post('/api/book', async (req, res) => {
 
 
 // ===== AUTH ENDPOINT =====
-//app.use(express.json()); // Make sure you have this to parse JSON bodies
 
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
@@ -81,10 +80,6 @@ app.post('/api/login', async (req, res) => {
     res.status(500).json({ error: 'Server error during login' });
   }
 });
-
-
-
-
 
 app.listen(PORT, () => {
   console.log(`Backend running on http://localhost:${PORT}`);
